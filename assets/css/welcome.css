@@ -1,0 +1,23 @@
+
+    .start_btn{
+        width:25%;
+        top: 700px;
+        left: 31px;
+        padding: 15px, 40px, 15px, 40px;
+        border-radius: 10px;
+        justify: space-between;
+
+    }
+    .content_img{
+        width: 35% ! important;
+        height: 400px;
+        top: 137px;
+        left: -26px;
+    }
+    .skip{
+        color:#0b5ed7;
+        margin-right:10%;
+    }
+    .radio  {
+        border: 2px solid black;
+    }
