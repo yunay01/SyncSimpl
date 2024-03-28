@@ -33,25 +33,9 @@ require_once (dirname(__FILE__).'/config/config.php');
     </div>
 
     <?php include(dirname(__FILE__).'/components/script.php'); ?>
-
-<script>
-    $(document).ready(function () {
-        $('input[type=radio][name=checkbox]').on('change', function () {
-            var clickedCheckboxId = $(this).attr('id');
-            console.log('Clicked Checkbox ID: ' + clickedCheckboxId);
-            window.location.href = clickedCheckboxId + '.php'; 
-        });
-
-        $(".skip").click(function(){
-            window.location.href = 'signin.php'; 
-        });
-
-        setTimeout(function() {
-        window.location.href = 'signin.php'; 
-        }, 2000); 
-
-    });
-</script>
-
+    <script>
+       <?php include(dirname(__FILE__).'/assets/js/welcome-3.js'); ?>
+    </script>
+    
 </body>
 </html>

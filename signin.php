@@ -1,29 +1,3 @@
-<?php
-   require_once(dirname(__FILE__).'/manager/session_manager.php');
- 
-   if(isSessionValid() == true){
-      header("Location: index.php");
-      die();
-  }
-   
-  if (!empty($_POST['email']) && !empty($_POST['password'])) {
-   
-      if(validateLogin($_POST['email'],$_POST['password']) == true){
-          $getloginde = getlogindetails($_POST['email'],$_POST['password']);
-        //   if(!empty($getloginde) && $getloginde["user_role"] == "1"){
-          if(!empty($getloginde) ){
-                createSession(true,$_POST['email']);
-                header("Location: index.php");
-        }
-         
-         die();
-      }  
-   }
-?>
-
-<?php 
-require_once (dirname(__FILE__).'/config/config.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +20,7 @@ require_once (dirname(__FILE__).'/config/config.php');
                 <div class="card mt-5 mb-3">
                     <div class="card-body">
 
-                        <form class="form-horizontal m-t-20" id="loginform"  method="post" onsubmit="doLogin()">
+                        <form class="form-horizontal m-t-20" id="loginform"  method="post" onsubmit="loginUser()">
 
                         <div class="row">
                             <div class="col-md-12 mb-3">
@@ -158,60 +132,6 @@ require_once (dirname(__FILE__).'/config/config.php');
     <?php include(dirname(__FILE__).'/components/script.php'); ?>
     <script>
        <?php include(dirname(__FILE__).'/assets/js/signin.js'); ?>
-    </script>
-
-      <script>
-      $(document).ready(function(){
-          $("#recoverform").hide();
-      })
-         $(".preloader").fadeOut();
-         // ============================================================== 
-         // Login and Recover Password 
-         // ============================================================== 
-         $('#to-recover').on("click", function() {
-             $("#loginform").hide();
-             $("#recoverform").fadeIn();
-         });
-         $('#to-login').click(function(){             
-             $("#recoverform").hide();
-             $("#loginform").fadeIn();
-         });
-
-         function doLogin(){
-            e= $('[name ="login"]');
-            if($('[name ="email"]').val()=='' || $('[name ="password"]').val()=='')
-               return;
-             if(!e.is('[disabled=disabled]'))
-                 e.attr('disabled', true);
-             else
-                 e.attr('disabled', false);
-             e.children(":first").toggleClass('fa-spinner fa-spin');
-         }
-
-        $("#recoverform").submit(function(e) {
-            e.preventDefault();
-            $("#email-error").html("");
-            $('[name ="recovery"]').children(":first").toggleClass('fa-spinner fa-spin');
-              var email= $("#tb_recoverymail").val();
-            $.post({
-                url: "./manager/pwd_manager.php",
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify({ 
-                    action_type: "send_pwd_reset",
-                    email: email
-                })
-            }).done(function (data) {
-                console.log(data);
-                $('[name ="recovery"]').children(":first").toggleClass('fa-spinner fa-spin');
-                if(data.result == "success"){
-                    $("#email-error").html('<span class="text-success">If the email is valid, you will receive a password reset link now. Please note the link is valid for 48hrs only.</span>');
-                    $("#tb_recoverymail").val('');
-                }
-                else
-                    $("#email-error").html('<span class="text-danger">' + data.error + '</span>');
-              });
-            }); 
-      
     </script>
    </body>
 </html>
