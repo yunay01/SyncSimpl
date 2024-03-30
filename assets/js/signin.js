@@ -11,3 +11,19 @@ function togglePasswordVisibility() {
         $(".eye_icon").append('<i class="fa-regular fa-eye-slash eyeicon" onclick="togglePasswordVisibility()"></i>');
     }
 }
+
+$(document).ready(function(){
+    $("#recoverform").hide();
+})
+   $(".preloader").fadeOut();
+   // ============================================================== 
+   // Login and Recover Password 
+   // ============================================================== 
+   $('#to-recover').on("click", function() {
+       $("#loginform").hide();
+       $("#recoverform").fadeIn();
+   });
+   $('#to-login').click(function(){             
+       $("#recoverform").hide();
+       $("#loginform").fadeIn();
+   });
